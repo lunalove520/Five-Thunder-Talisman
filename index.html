@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>異人研究院xLuna寵物溝通師 | 五雷符歷史由來</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'paper': '#FDFBF7', // 宣紙色
+                        'paper-dark': '#F5F2EB', // 稍微深一點的紙色，用於區塊
+                        'ink': '#2C2420',   // 墨色
+                        'ink-light': '#5A4E46', // 淺墨色
+                        'cinnabar': '#8C3224', // 朱砂紅
+                        'stone': '#D6CDC5', // 灰褐色
+                    },
+                    fontFamily: {
+                        'serif': ['"Noto Serif TC"', 'serif'],
+                        'sans': ['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'paper-texture': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.08%22/%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #FDFBF7;
+            color: #2C2420;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 閱讀進度條 */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            z-index: 100;
+            background: transparent;
+        }
+        #progress-bar {
+            height: 100%;
+            background: #8C3224;
+            width: 0%;
+            transition: width 0.1s ease-out;
+        }
+
+        .seal-box {
+            border: 2px solid #8C3224;
+            color: #8C3224;
+            padding: 6px 12px;
+            display: inline-block;
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            position: relative;
+            background-color: rgba(253, 251, 247, 0.8);
+        }
+        
+        .seal-box::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            border: 1px solid #8C3224;
+            opacity: 0.5;
+        }
+
+        /* Paper texture overlay */
+        .texture-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.06%22/%3E%3C/svg%3E');
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Blockquote Styling */
+        .quote-box {
+            position: relative;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            background-color: rgba(140, 50, 36, 0.03);
+            border-left: 4px solid #8C3224;
+            font-family: 'Noto Serif TC', serif;
+            color: #5A4E46;
+        }
+
+        /* 針對手機優化的文字排版 */
+        p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        /* 章節標題裝飾 */
+        .section-number {
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 700;
+            color: rgba(140, 50, 36, 0.15);
+            font-size: 4rem;
+            line-height: 1;
+            position: absolute;
+            top: -1.5rem;
+            left: -1rem;
+            z-index: -1;
+        }
+
+        .section-header {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-top: 1rem;
+            display: inline-block;
+        }
+
+        ::selection {
+            background: #8C3224;
+            color: #FDFBF7;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-cinnabar selection:text-paper">
+
+    <!-- Texture Overlay -->
+    <div class="texture-overlay"></div>
+
+    <!-- Progress Bar -->
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <!-- Navigation (Sticky & Minimal) -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-paper/95 backdrop-blur-sm border-b border-stone/30 transition-all duration-300">
+        <div class="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-2 h-2 bg-cinnabar rounded-full"></div>
+                <span class="font-serif text-ink tracking-widest text-sm font-bold">異人研究院xLuna寵物溝通師</span>
+            </div>
+            
+            <button id="menu-btn" class="group flex flex-col items-end gap-1.5 cursor-pointer p-2">
+                <span class="w-6 h-0.5 bg-ink transition-all duration-300 group-hover:w-4"></span>
+                <span class="w-4 h-0.5 bg-ink transition-all duration-300 group-hover:w-6"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Fullscreen Menu -->
+    <div id="menu-overlay" class="fixed inset-0 bg-paper z-40 transform translate-x-full flex flex-col justify-center items-center">
+        <div class="absolute top-0 right-0 p-6 h-16 flex items-center">
+            <!-- Close handled by button logic -->
+        </div>
+        <ul class="space-y-6 text-center font-serif text-lg md:text-2xl text-ink/80 px-8 w-full max-w-lg">
+            <li class="menu-item cursor-pointer border-b border-stone/20 pb-2 hover:text-cinnabar transition-colors" data-target="#section-1">一、五雷符的地理來源與歷史背景</li>
+            <li class="menu-item cursor-pointer border-b border-stone/20 pb-2 hover:text-cinnabar transition-colors" data-target="#section-2">二、童年喪親與第一次超拔儀式</li>
+            <li class="menu-item cursor-pointer border-b border-stone/20 pb-2 hover:text-cinnabar transition-colors" data-target="#section-3">三、六畜符的重新出現與余師太</li>
+            <li class="menu-item cursor-pointer border-b border-stone/20 pb-2 hover:text-cinnabar transition-colors" data-target="#section-4">四、六畜符的寓意與結構</li>
+            <li class="menu-item cursor-pointer border-b border-stone/20 pb-2 hover:text-cinnabar transition-colors" data-target="#section-5">五、正名「五雷符」與循環邏輯</li>
+            <li class="menu-item cursor-pointer border-b border-stone/20 pb-2 hover:text-cinnabar transition-colors" data-target="#section-6">六、2025年與弟子Luna</li>
+            <li class="menu-item cursor-pointer hover:text-cinnabar transition-colors" data-target="#section-7">七、飛虎隊與先輩庇護</li>
+        </ul>
+        <div class="absolute bottom-10 opacity-50 text-xs font-sans tracking-widest text-center">
+            <p>金瀾言卿 · 異人研究院</p>
+            <p class="mt-1">內部文檔</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pt-28 pb-24 px-6 md:px-12 max-w-3xl mx-auto relative">
+        
+        <!-- Header -->
+        <header class="text-center py-10 mb-12 fade-in">
+            <div class="flex justify-center mb-8">
+                <div class="seal-box rotate-2 shadow-sm">內部文檔</div>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-serif font-bold text-ink leading-tight mb-6">
+                五雷符<br>
+                <span class="text-xl md:text-3xl font-medium mt-3 block text-ink-light">歷史由來與地理來源</span>
+            </h1>
+            <div class="w-12 h-[2px] bg-cinnabar mx-auto my-8"></div>
+            <p class="text-xs font-sans text-stone-500 tracking-[0.2em] uppercase">The Origin & History</p>
+            <p class="mt-4 font-serif text-sm text-ink-light">金瀾言卿 · 異人研究院</p>
+        </header>
+
+        <!-- Article Sections -->
+        
+        <!-- Section 1 -->
+        <article id="section-1" class="mb-20 fade-in">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="text-2xl font-serif font-bold text-ink relative z-10">五雷符的地理來源與歷史背景</h2>
+            </div>
+            
+            <div class="prose prose-lg text-ink/90 leading-loose font-sans">
+                <p>「它」源自中國雲南省昆明市大理州祥雲縣（曾名雲南縣）的雲南驛，那也是我的故鄉。</p>
+
+                <div class="bg-paper-dark p-6 rounded-sm border border-stone/30 my-6">
+                    <p class="text-sm text-ink-light mb-0">提及雲南驛這個名字，我們的國際友人們，尤其是美國的朋友和臺灣的同胞，都会對這裡有所耳聞。在抗日戰爭時期，許多人的祖輩曾英勇地守護著我的家鄉，不惜奉獻生命，最終永遠地留在了這片土地上。</p>
+                </div>
+
+                <p>符文的歷史最早可追溯至明末清初，即中國歷史上的1600年至1644年這一時期，正值明朝末年至清朝初年。</p>
+                <p>在我家鄉，這種符式的最初傳承方式頗為獨特：以<strong class="text-cinnabar font-serif">雷擊棗木</strong>為載體，刻上符文，並由法師們採用單代單傳的收徒模式延續至今。</p>
+                <p>漢元封二年（前109年），設立雲南縣，雲南驛地區成為縣治所在地。</p>
+                <p>後晉開運二年（945年），僧人本湛募資召集眾人修建白馬廟（即白馬寺）。</p>
+                <p>明代（公元1646年）永曆皇帝在昆明聯合抗清勢力，並派遣大將李定國統率大軍進駐雲南，紮營屯田、訓練軍隊。李定國治軍嚴明、忠誠愛國、心繫百姓，戰功卓著，深得民眾愛戴。</p>
+                <p>大明永曆十四年（1660年）春，李定國因忠誠護主，在雲南驛以身殉職。</p>
+                <p>由於段思平大理國開國皇帝（937年建立大理國）與李定國均騎乘白馬，故民間尊稱其為「白馬將軍」，鳳山的寺廟也因此得名「白馬寺」。</p>
+                <p>明清時期，雲南驛商舖初步建立。</p>
+                <p>明代，關聖廟（即現今的白馬寺）得以落成。</p>
+                <p>到了清代，雲南驛的商業愈發繁榮，各類商舖鱗次櫛比，涵蓋了衣食住行等各個方面，成為周邊地區重要的物資集散地。而關聖廟在這一時期也不斷修繕擴建，香火旺盛，不僅承載著當地百姓對關聖的崇敬與信仰，更成為了雲南驛文化傳承與交流的重要場所，見證著這座古鎮在明清時期的興衰變遷。</p>
+                <p>目前，繼承符式的主法師是聖帝門下普善壇宣化弟子余姓名丙，坤善修，年逾八十載。</p>
+                <p>余法師大約在二十歲左右開始修習法道，精通神通之術。</p>
+                <p>三十餘歲時，丈夫不幸辭世，她獨自撫養二子成人，在家鄉雲南驛度過了清貧卻樂於助人的一生。</p>
+                <p class="text-cinnabar font-medium mt-8 text-center">——我與余師太結緣的方式頗為奇妙</p>
+            </div>
+        </article>
+
+        <!-- Section 2 -->
+        <article id="section-2" class="mb-20 fade-in">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="text-2xl font-serif font-bold text-ink relative z-10">童年喪親與第一次超拔儀式的衝擊</h2>
+            </div>
+            
+            <div class="prose prose-lg text-ink/90 leading-loose font-sans">
+                <p>2010年，我的大伯父意外去世，家人聘請余法師為其舉行超拔儀式。</p>
+                <p>那時，我尚不懂離別的深意，也不明白死亡的含義。</p>
+                <p>只依稀記得，在醫院病房裡，我目睹伯父面容發青，腹部腫脹，那個再也不會起身教我洗手、教我吃飯不吧唧嘴的親人。</p>
+                <p>看著周圍親人們哭成淚人，搖晃著他的身軀，我走上前捂住他的手，感受著他的體溫在我掌心一點點冷卻、消逝。</p>
+                <p>那一刻，我才真正意識到，死亡意味著這漫長的一生中，我再也見不到我的伯父了，再也無法撲進他的懷抱撒嬌，讓他給我買牛奶喝了。</p>
+                
+                <div class="my-8 h-px bg-stone/40 w-full"></div>
+
+                <p>我們將伯父的遺體運送回家，進行整理和清潔，隨後入棺並封棺。</p>
+                <p>按照當地習俗，遺體需在家停放三天，期間舉行葬禮並進行禱告，最後下葬。</p>
+                <p>當天，余師太帶領她的「法務」團隊匆匆趕來，全程陪伴我們完成每一個步驟。</p>
+                <p>記得在家人為大伯洗臉時，余師太在一旁低聲念誦著我聽不懂的話語，直至封棺之際，余師太表示每個人都可以對大伯父說一句話，他能夠聽見，從那一刻起，我對她產生了深深的敬仰，正是她，教會了我第一次如何表達愛與思念。</p>
+                <p>在接下來的兩天裡，日程被民俗文化中的超拔儀式所佔據，充滿了吹拉彈唱的樂聲，全家人也積極配合她的團隊，投身於手工製作所需的各類道具。</p>
+                <p>我記得那時我們製作了蓮花燈、紙鶴、紙馬、魂幡和紙橋。</p>
+                <p>雖然我不甚理解這些物品的用途，但清晰地記得她解釋說，這些都是為了迎接我大伯以另一種方式回家，以及助他前往另一個世界的必備之物，聽到這番話，我做起手工來愈發專注和認真。</p>
+                
+                <div class="quote-box">
+                    <p class="mb-0">第三天，亦即下葬當日的夜晚，我們取出事先精心製作的手工製品，在家門口搭建起必要的引渡場景，並在紙橋的兩端均勻地鋪撒了石灰粉。</p>
+                </div>
+
+                <p>隨後，我們點亮了這些蓮花燈，余師太的團隊隨即開始吹拉彈唱。</p>
+                <p>我注意到，薄薄的石灰層上逐漸顯現出一個個若隱若現的男性腳印，我深知這必定是我大伯的足跡。於是，我立刻高聲呼喊家人前來圍觀，我們所有人都親眼見證了這一幕。那些腳印，一個緊接一個，從紙橋的另一端緩緩延伸至家門口，彷彿大伯真的正以一種我們看不見卻能感知的方式，一步步向我們走來。</p>
+                <p>眾人屏息凝視，空氣中瀰漫著一種難以言表的莊嚴與溫情。</p>
+                <p>余師太輕聲解釋道，這是大伯的靈魂在通過我們搭建的橋樑，跨越生與死的界限，向我們做最後的告別。</p>
+                <p>那一刻，我心中既充滿了對未知的敬畏，也湧動著對大伯深深的懷念與不捨。</p>
+                <p>那時，我首次深入清晰地了解並參與了民間民俗文化，在此之前，我對神鬼之事持懷疑態度，認為這些都是虛妄之談。</p>
+                <p>當時，余師太在我心中僅是一位演員，她在演繹著離別與重聚的戲碼。</p>
+                <p>即便在我出家之前，這種觀念也未曾改變。</p>
+                <p>然而，經歷了那晚的種種之後，我再次回憶起，我的觀念發生了顛覆性的轉變。</p>
+                <p>或許是那些清晰地印在石灰粉上的腳印，空氣中瀰漫的莊重與溫情，以及余師太那輕柔卻充滿力量的話語，都促使我重新審視那些我曾視為迷信的民間民俗文化。</p>
+                <p>我開始意識到，這不僅僅是一種儀式，更是一種情感的寄託，一種對逝者的深切緬懷與尊重，一種生者與死者之間獨特的溝通方式。</p>
+                
+                <div class="bg-stone/10 p-5 rounded-sm my-6">
+                    <h3 class="font-serif font-bold text-ink mb-3 text-lg">民間民俗超拔文化的深遠意義</h3>
+                    <p class="text-sm text-ink-light mb-0">此刻在我眼中顯得尤為清晰且至關重要。它猶如一座無形之橋，橫跨生與死的界限，使生者得以向逝者傾訴最後的情感，也讓逝者的靈魂獲得安寧。這種文化不僅是一種傳承，更是一劑心靈的慰藉，一種對生命無常的深刻領悟與坦然接納。</p>
+                </div>
+
+                <p>後來，在葬禮圓滿結束後，我們全家送別余師太團隊，我好奇地看著她，這位在葬禮中始終沉穩從容、給予我們莫大精神支撐的長者。</p>
+                <p>她似乎察覺到了我的目光，微笑著朝我點點頭，那笑容裡有著歷經世事的豁達與溫暖。</p>
+                <p>她輕輕拍了拍我的肩膀，輕聲說道：「小娃娃，這些民俗文化傳承了許久，裡面藏著的是人們對生活的熱愛和對生命的敬重。」</p>
+                <p>我似懂非懂地點點頭，心中卻對這看似簡單話語背後的深意有了更多的思索，我對她說：「余奶奶，我長大要成為像你一樣的人。」</p>
+                <p>她立刻捂住了我的嘴巴，輕聲說道：「這可說不得啊」，我不明白她為何如此回應我。</p>
+                <p>只見我的家人驚愕地站在原地，目光聚焦在我們身上。</p>
+                <p>此時，我望向她的眼睛，只見她的眼神瞬間變得凝重，與我目光交匯之際，我彷彿窺見了更深邃、卻又難以言喻的情感。</p>
+                <p class="text-center font-serif text-cinnabar mt-6">——自那以後，我們便再無交集。</p>
+                <p>這二十年來，日子如流水般靜靜淌過，偶爾在夜深人靜時，我會想起余師太那帶著豁達與溫暖的笑容，還有她那番關於民俗文化的話語，心中總會泛起層層漣漪。</p>
+                <p>但生活的忙碌讓我漸漸將這份回憶深埋心底，只是偶爾在路過那些舉辦民俗活動的場所時，會不由自主地停下腳步，腦海中浮現出余師太在葬禮上沉穩從容的模樣。</p>
+                <p>我也曾試圖從旁人那裡打聽余師太的消息，可大家都只是搖頭，說很少再見到她，彷彿她就像一陣風，悄然吹過我的生活，又消失得無影無蹤。</p>
+            </div>
+        </article>
+
+        <!-- Section 3 -->
+        <article id="section-3" class="mb-20 fade-in">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="text-2xl font-serif font-bold text-ink relative z-10">六畜符的重新出現與與余師太再相逢</h2>
+            </div>
+            
+            <div class="prose prose-lg text-ink/90 leading-loose font-sans">
+                <p>——直到2023年癸卯年，機緣巧合之下，我皈依了全真道龍門派。</p>
+                <p>在北京學習兩個月後，我前往杭州這座讓我夢想起航的城市，結識了一位從事互聯網行業的道友，姓施名俊傑。他為我引薦了一位專注於寵物領域的小兄弟，並建議我可以嘗試與這位小兄弟合作，開展找寵業務。</p>
+                <p>——於是，我回到雲南後，我們便開始了合作。</p>
+                <p>隨著反饋日益良好，我們二人在互聯網上逐漸嶄露頭角，由此開啟了我一段「救寵渡人」的曲折修行之旅。</p>
+                <p>那時，他在台前，我在幕後，隨著業務板塊的不斷擴展，單純的動物觀測溝通和尋寵服務已無法滿足寵物主們的多元化需求，她們希望獲得一些具有為寵物祈福意義的事物，諸如儀式或符紙等。</p>
+                <p>面對這些新奇的要求，我一度感到困惑不已。這些儀式和符紙通常是為人類準備的，動物該如何適用呢？況且當時的我尚未掌握儀式和符畫之術。</p>
+                <p>為此，我夜不能寐，在與動物長期的互動中，我對這個群體產生了深厚的情感，真心期盼能有一種為它們祈福的文化方式。</p>
+                <p>於是啊，我白天就到處跑，想找找學這些手藝的門路，因為我打心眼兒裡就想好好保護它們，也正是這些小動物，讓我出了名，我也想做些回饋。</p>
+                
+                <h3 class="font-serif font-bold text-xl text-ink mt-8 mb-4">重逢的契機</h3>
+                <p>說來也巧，心中萌發的願望彷彿受到了某種感召。</p>
+                <p>隔天晚上，我與父親提及，希望將老宅中的一套緬梨長椅搬到會所裡。</p>
+                <p>當晚，父親便帶我前往老宅，查看那套長椅是否還能使用。老宅是一座土木結構建造的青磚四合院，雜草叢生的院落在微弱的燈光下顯得愈發破敗，卻仍隱約透出當年的輝煌。正當我感慨於爺爺建造老宅時的審美情趣時，突然被掉落的磚塊嚇了一跳。</p>
+                <p>慌亂中，我跑進了一間小屋，父親告訴我這是曾經的畜房，他小時候這裡曾養過雞鴨鵝和豬。</p>
+                <p>我手持手電筒四處張望，突然發現一張破舊褪色、符式模糊不清的符紙。我好奇地問父親：「這是什麼？」父親說道：「這是<strong class="text-cinnabar">六畜符</strong>，用以鎮宅辟邪，確保家主及家畜的平安。」</p>
+                <p>我當時靈機一動，想到過去大家生活條件有限，未必家家戶戶都能像如今這樣養貓狗等寵物。</p>
+                <p>而現在，人們也不再像以前那樣在家裡飼養雞鴨鵝豬馬牛。</p>
+                <p>動物皆屬畜道，那麼這道「六畜符」是否可以用來為現在家中的小動物們祈願，保佑它們平安呢？我將這個奇思妙想告訴了父親，他十分認可，並表示可以帶我去拜訪懂得這道符的先生，以便深入學習。</p>
+                <p>第二天，我們前往這位先生的家，行至途中，天空突然飄起細雨，烏雲愈發密集，雷聲也開始轟鳴。</p>
+                <p>由於父親並未掌握先生的直接聯繫方式，僅知其大致住址，我們不得不沿途詢問。</p>
+                <p>我憂心雨勢漸猛，父親便加快步伐，在附近多方打聽。</p>
+                <p>最終，從一位老者口中得知，這位先生近期不在家中，若我們事務緊急，不妨前往拜訪他的師父，老者還詳細告知了先生師父的住址。</p>
+                <p>當時，我們並未意識到老者提及的這位老師父正是當年的余師太，那時年幼，記憶模糊，我和父親都未能記住她的姓氏，僅對她的外貌有模糊印象，即便見面，恐怕也難以認出。</p>
+                <p>我們父女二人如同不請自來的訪客，前往這位老師父的家中。</p>
+                <p>到達後，我敲了許久的門，心中以為又要無功而返，正欲轉身離去之際，卻忽然聽到屋內傳來一位女性老者的聲音：「來了來了，你怎麼才來呀。」</p>
+                
+                <div class="quote-box">
+                    <p class="mb-0">推開房門，一張熟悉的面孔驟然映入眼簾。那句跨越了20年的、看似天真無邪的玩笑話，在這一刻竟顯得如此具體而清晰。</p>
+                </div>
+
+                <p>我尚在震驚之中，她望著我，微微愣神。</p>
+                <p>目光交匯的瞬間，她認出了我，輕聲說道：「你長大了，卻一點都沒變，剛才還以為是別人呢。本來今天不打算接待了。」</p>
+                <p>她輕輕拉起我的手，細緻地端詳著我的面容，眼神中流露出一種彷彿一切早已註定的神情。</p>
+                <p>她低聲喃喃自語，說的是我聽不懂的方言。</p>
+                <p>在我說明此次前來的目的後，她毫不猶豫地將符牌交到我的手中，並告知了我符牌的祕匙。</p>
+                <p>她告訴我，這塊符牌自她繼承以來，從未允許任何人帶回家中，但今天卻破例讓我帶走，第二天再歸還。</p>
+                <p>原本，我只是打算向她訂購符和學習的，沒想到她竟直接將符牌給了我。</p>
+                <p>後來我才明白，帶回家是為了認主，而真正的繼承則要等到她去世之後。</p>
+                <p>在這之後，我經常去拜訪她。</p>
+                <p>每次見面，我都會告訴她這道符我給了誰，大家給了我怎樣的反饋。</p>
+                <p>她也和我聊起了傳授她這道符式的人，那是一位男性，乾道，一位出家的道士，屬於正一派。</p>
+                <p>她大約20歲時，做姑娘時期（未婚女子），去街上趕集，這位道長正在集市上擺攤堪輿，突然叫住了她。她出於好奇走上前，道長第一句話就問她：「想不想成仙有神職呀？」然後哈哈大笑。她好奇地問道：「怎麼個辦法？」道長便將這道刻有符文的雷擊棗木遞給了她，並說：「你要的話，今天你接了，我就是你的師父。」自此，師太的修行助人及命運的齒輪開始轉動。</p>
+            </div>
+        </article>
+
+        <!-- Section 4 -->
+        <article id="section-4" class="mb-20 fade-in">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="text-2xl font-serif font-bold text-ink relative z-10">六畜符的寓意、結構與風雨雷雲霧的象徵體系</h2>
+            </div>
+            
+            <div class="prose prose-lg text-ink/90 leading-loose font-sans">
+                <p>她告訴我，這道符的寓意並非那麼簡單。</p>
+                <p>自文革起，許多民俗文化活動中的某些元素被列為封建迷信。</p>
+                <p>隨著新中國的成立，大家的日子逐漸奔向小康，家家戶戶吃得飽穿得暖。在這樣條件下，讀書學習，跟隨科技發展，人們生活安定，不再流離失所。於是，很多東西有了更科學的解釋，許多鎮宅等文化寓意逐漸被沖淡。</p>
+                <p>實際上，這道符在傳統意義上，首先是辟邪防小，其次是鎮宅，隨後是平安、健康、仕途文昌、財富及桃花。</p>
+                <p>在她30歲以後，這道符又被賦予了保家畜平安的寓意，因此才有了我們現在所說的「六畜符」這個稱呼。</p>
+                <p>其實，它一直以來並沒有一個完整的稱呼。</p>
+                <p>她師父將所有精華總結傳承下來，總共只傳授了她兩道符式：一道是這道符，另一道則是用於新家舊宅、新車舊車破煞進氣寓意的符式。</p>
+                <p>她回憶道，小時候家庭條件較為艱苦，未曾接受過正規教育，識字能力有限，並不具備深厚的易學文化底蘊，但我可以嘗試一番，解構這道符式，深入探究其內在含義，為其正名。</p>
+                
+                <div class="bg-paper-dark p-6 rounded-sm border border-stone/30 my-8">
+                    <h3 class="font-serif font-bold text-lg mb-4 text-ink">符式結構解讀</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-ink/80 text-sm">
+                        <li><strong>符頭：</strong>「雷神」二字，與雷氣密切相關。</li>
+                        <li><strong>符膽：</strong>上方先天八卦，中間後天八卦，下方祕匙符韻（含閃電與雲字頭）。</li>
+                        <li><strong>氣路：</strong>上開坎門，氣入巽位。</li>
+                        <li><strong>字樣：</strong>左「曲」右「人」，下左方配「酉」符腳，以「百解」收尾。</li>
+                    </ul>
+                </div>
+
+                <p>我們父女二人基於當前的術數及易理知識進行解讀，認為「酉」代表金，「曲」象徵器物發聲，人聽之，入耳便產生念頭，進而緣分漸進，這符式賦予了佩戴者結緣的機會，且有其次第之分。</p>
+                <p>夜晚古人會敲銅鑼「天乾勿燥，小心火燭」古人此舉，不僅為驅邪避凶，更似以聲傳意，借銅鑼之音，喚醒四周生靈對安全的警覺。</p>
+                <p>火燭之光，雖能照亮夜路，卻也易引火患，故「小心火燭」之語，實為提醒眾人，在享受光明之時，亦不可忘卻防範之責。</p>
+                <p>天乾物燥，更需謹慎，此言一出，既是對自然規律的敬畏，也是對生活節奏的把握與提醒。</p>
+                <p>酉在十二地支代表雞，天亮雞叫，雞鳴之時，往往預示著天將破曉，新的一天即將開始。</p>
+                <p>這「酉」字所蘊含的，不僅是對時間的指引，更似一種對生活節奏的把握與提醒。</p>
+                <p>就如同那清晨的雞鳴，喚醒沉睡中的人們，開始新一天的勞作與生活，告誡人們要順應天時，把握每一個時機，不可荒廢光陰。</p>
+                <p>許多寺廟的銅鐘也位於西方，正如我們常提及的西方極樂世界。</p>
+                <p>在奇門遁甲中，驚門位於兌宮，而該宮內的地支符號為酉。</p>
+                <p>我與父親深入探討並辯論，師太所講述的內容蘊含豐富寓意，是否可以理解為「風雨聚，緣齊聚；雷雨聚，緣強聚」，藉助手雷神之力，得以赦免百解，正所謂天官賜福。</p>
+                
+                <div class="my-8 flex items-center justify-center">
+                    <span class="text-stone font-serif text-sm px-4">以下為辯論內容分享</span>
+                </div>
+
+                <!-- 辯論卡片區塊 -->
+                <div class="space-y-6">
+                    <!-- 風 -->
+                    <div class="bg-white border border-stone/20 p-6 shadow-sm rounded-sm">
+                        <h4 class="font-serif font-bold text-xl text-ink mb-2">風中緣氣</h4>
+                        <div class="w-8 h-[2px] bg-stone/50 mb-4"></div>
+                        <p>風，象徵著信息，即信件中的「信」。</p>
+                        <p>目睹風起，無論是綿延不斷，還是驟然狂暴，皆預示著各類信息的到來，昭示著某事的即將發生。此事或許是心中期盼的、手中進行的、正在發展的，或是通過手機得知的種種，但凡與內心相連，心靈接收到信息，風便會隨之而起。對於修行高深之人，事起則風起，幾乎同步發生。</p>
+                        <p>風氣承載著信念，傳播至應聽到之人耳中，此耳非尋常之耳，而是心耳。我們平時打噴嚏，常言「有人在背後念叨你」，其原理相同——一陣氣息突至，傳入人體，我們受此緣氣干擾，肺魄感應而動，發於鼻竅成噴嚏。</p>
+                    </div>
+
+                    <!-- 雨 -->
+                    <div class="bg-white border border-stone/20 p-6 shadow-sm rounded-sm">
+                        <h4 class="font-serif font-bold text-xl text-ink mb-2">雨中思念</h4>
+                        <div class="w-8 h-[2px] bg-stone/50 mb-4"></div>
+                        <p>風中有信念，信念借風氣以傳，配合適當的方法，能起到「萬里傳音」的效果。</p>
+                        <p>而雨中的氣息則是一種絮絮縈繞的狀態，就像某種電子傳輸的波幅，是一種纏繞綿雲的思感。</p>
+                        <p>它與信念的束直堅定不同，思念是信念的一種繚繞不化的狀態，一般情況下，風中不僅存在信念，同時也存有思念，但風中的這份思氣太過微弱，因此常被忽略。</p>
+                        <p>風和雨是升降關係，風信主暢通，雨思主沉緩。</p>
+                    </div>
+
+                    <!-- 雷 -->
+                    <div class="bg-white border border-stone/20 p-6 shadow-sm rounded-sm">
+                        <h4 class="font-serif font-bold text-xl text-ink mb-2">雷中重念</h4>
+                        <div class="w-8 h-[2px] bg-stone/50 mb-4"></div>
+                        <p>雷，象徵著內心的大幅波動。</p>
+                        <p>凡能引發內心劇烈動盪之事，通常都需要人們保持警覺，仔細審視自己的行為態度、選擇考量以及後續的應對策略。</p>
+                        <p>雷代表天地的刑罰，天地間亦以雷聲擴散來震懾不和諧者，在道教中，有雷法懲邪的說法，對逾矩或行不正之事的生物施以雷擊，因此，若雷鳴因高修者而起，一般需反思自身，這份信念會比普通的雷鳴更加沉重，更直擊心間。</p>
+                        <p>風為信念的平流，雨為思念的繚繞，雷的重念則即刻重壓下來，這是三者信念類型的區別。</p>
+                    </div>
+
+                     <!-- 雲 -->
+                     <div class="bg-white border border-stone/20 p-6 shadow-sm rounded-sm">
+                        <h4 class="font-serif font-bold text-xl text-ink mb-2">雲中聚念</h4>
+                        <div class="w-8 h-[2px] bg-stone/50 mb-4"></div>
+                        <p>雲，是信念的集合體，是各類信念雜然堆積的產物，雲的堆積狀態與雨中思念的纏繞翻滾不同，雲是單純的能量累積，沒有雨那般纏綿的呼喚與深邃，相對而言，雲色越深越厚，預示之事越大。</p>
+                        <p>從一片雲中，可以預知即將到來的緣的類型與信息，它們將在我們接下來的行為中揭示諸多事宜。這種信息需要我們解讀，其原理即「信念的積聚」。</p>
+                    </div>
+
+                     <!-- 霧 -->
+                     <div class="bg-white border border-stone/20 p-6 shadow-sm rounded-sm">
+                        <h4 class="font-serif font-bold text-xl text-ink mb-2">霧對緣氣的加減速影響</h4>
+                        <div class="w-8 h-[2px] bg-stone/50 mb-4"></div>
+                        <p>霧氣籠罩的區域，各類事物的緣氣交互會減緩，因為大量水氣阻隔，緣氣被水截住而不能流通，導致該區域變化進展緩慢。</p>
+                        <p>籠罩範圍內的緣氣交互會加速，如同一條三米長的蛇被侷限在一平方米的小房子內，其交互變化更快更密集，而外部緣氣因霧氣阻隔無法通過，導致外部減緩、內部加速的特殊現象，甚至有些霧氣特別濃厚的地方會出現時間偏差。</p>
+                        <p>寒熱陰陽，《元命包》曰：「陰陽亂為霧。」《黃帝》雲：「霧者，百邪之氣，陰來昌陽。」霧氣分隔陰陽兩界，圍困一界、否定一界、亂一界。</p>
+                        <p>霧溫度低，而信念為熱，故霧之寒能吞噬信念之熱，信念遇經久不散的寒霧會降低熱度，分散而不能透霧而出，逐漸消弭於霧中，故霧氣對信念有「減卻」效果，會「吞噬」信念。</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-ink/80 leading-loose">
+                    <p>辯論到這裡時，父親認為符內容就是霧，為人的念頭，心念動則百事生，念有陰陽，有好有壞，好的時候可以比喻為「夢想目標」不好時則是「欲望貪念」。</p>
+                    <p>符的寓意效果則代表所求之人的念，比如對方開口說，嘴巴就為那個「曲」她要招桃花，不要爛桃花，那麼這個念形成了霧，隨著信念的加強，形成了雲，雲多則積，積多及有風，風主信，風颳到一定程度，及感召天，隨後降雨，再伴隨著引動雷，雷聲響起及為驚為酉為西為兌宮，兌為澤，本是困的意，隨著雷驚閃電，最終百解，以達到訴主其目的。</p>
+                    <p>父親接著闡述，這整個過程就如同人內心念頭的演變軌跡。</p>
+                    <p>初始的念頭如霧般縹緲不定，而當這個念頭逐漸清晰且堅定時，便如同霧氣逐漸凝聚成雲。</p>
+                    <p>雲層不斷積聚，象徵著人的信念不斷增強，待積累到一定程度，就如同雲層獲得了風的動力。</p>
+                    <p>在傳統文化中，風象徵著信義與傳播，它攜帶著這股信念的力量四處擴散。</p>
+                    <p>當風的力量足夠強大時，彷彿能感召到上天的關注。</p>
+                    <p>上天感應後，便降下雨水，雨如同上天的回應與恩賜。</p>
+                    <p>而雷的出現，更是一種強烈的震動與喚醒，它打破原有的局限與困境。</p>
+                    <p>雷聲在五行八卦中對應著諸多意象，正如前面所述，驚為酉，為西，為兌宮，兌為澤。</p>
+                    <p>儘管澤有時帶有困厄之意，但雷鳴閃電的強大力量卻能衝破這種困境，最終達到百解之效，幫助訴主實現其內心所求的目標。</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Section 5 -->
+        <article id="section-5" class="mb-20 fade-in">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2 class="text-2xl font-serif font-bold text-ink relative z-10">正名「五雷符」、一年循環與焚符回歸的邏輯</h2>
+            </div>
+            
+            <div class="prose prose-lg text-ink/90 leading-loose font-sans">
+                <p>我接續父親的話說，雷電中蘊含著火的力量，因此一般符咒的使用週期為一年365天的天地循環週期後，需將其燒毀並禱告感恩天地。</p>
+                <p>這其中的緣由在於，雷電所蘊含的火之力量，具有特殊的靈性和時效性。</p>
+                <p>符咒是通過圖形、文字或者語言來儲存書符者強大的意念，來實現某種要求的能量表現形式，可以通過焚燒、佩戴等釋放這種信號。</p>
+                <p>符咒藉助這雷電之火的力量來發揮作用，經過一年365天的天地循環，其蘊含的能量逐漸耗盡。此時燒毀符咒並禱告感恩天地，一方面是對天地賜予力量的敬重與回饋，另一方面也是讓符咒所承載的使命得以圓滿結束。</p>
+                <p>而所謂逆轉上述過程，便是通過特定的儀式與禱告，將符咒所發揮過的力量進行反向的梳理與淨化，以避免殘留的能量對自身或周圍環境造成不必要的干擾，使一切回歸自然平衡的狀態。</p>
+                <p>講完這些內容後，我與父親分別請教了身邊的名師，經過反覆探討，最終驗證了這份邏輯的成立。於是，我們正式將其更名為<strong class="text-cinnabar">「五雷符」</strong>，或許這就是它最初、最原始的名字。</p>
+                <p>在接下來的日子裡，我們依據「五雷符」的原理與特性，進一步鑽研其繪製方法與使用規則。</p>
+                <p>在裁紙刷印時，特意選在雷電交加之夜，藉助天地間那磅礡的雷力融入筆墨，每一筆都彷彿蘊含著雷霆萬鈞之勢。</p>
+                <p>使用之時，也有諸多講究，需根據不同的訴求與場景，配合相應的咒語與儀式，方能將「五雷符」的威力發揮到極致，以達成人們心中所願，護佑一方平安順遂。</p>
+                <p>為何稱之為「五雷」呢？因為「五雷」之名，實則蘊含著深厚的文化內涵與神祕力量。</p>
+                <p>在傳統觀念中，「雷」被視為天地間極具威嚴與力量的自然現象，既能懲惡揚善，又蘊含著淨化與新生的力量。</p>
+                <p>而「五」在傳統文化中常代表五行，即金、木、水、火、土，五行相生相剋，循環不息，構成了世間萬物的運行規律。</p>
+                <p>「五雷」結合，象徵著藉助五行之力，匯聚天地間最純粹、最強大的能量，這種能量具有無上的威嚴與效力，能夠驅邪避凶、扶正祛邪。</p>
+                <p>因此，將此符命名為「五雷符」，正是期望它能如雷霆般強大，擁有護佑平安、化解災厄的神奇力量。</p>
+                <p>我也自此決定，未來我個人傳符的文化工藝只專注於這一道符。</p>
+                <p>雖然道家有36元帥符等及其他各類符，但都不及五雷符這般契合我心中的理念與追求。</p>
+                <p>五雷符所承載的五行之力與天地威嚴，是其他符難以比擬的，它不僅是簡單的符咒，更是傳統文化中淨化、新生、護佑等美好寓意的凝聚。</p>
+                <p>我願將全部精力傾注於這道符，深入鑽研其繪製方法與使用規則，把這道符所蘊含的神奇力量更好地傳承與發揚，讓更多人能藉助它獲得平安與順遂。</p>
+            </div>
+        </article>
+
+        <!-- Section 6 -->
+        <article id="section-6" class="mb-20 fade-in">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2 class="text-2xl font-serif font-bold text-ink relative z-10">2025年、喝茶、小杯子與弟子Luna</h2>
+            </div>
+            
+            <div class="prose prose-lg text-ink/90 leading-loose font-sans">
+                <p>今天是2025乙巳年，11月12日</p>
+                <p>我最近養成了一項新習慣——喝茶。</p>
+                <p>我人生中擁有的第一隻茶杯是汝窯天青色冰裂款，上面嵌有<strong class="text-cinnabar">「巳巳如意，生生不息」</strong>的字樣，這是製作這隻茶杯的老藝術家對我的美好祝願。這隻茶杯是我叔叔送給我的，腎為水，腎生精，精髓還於腦，主宰人的志向，最近確實感到迷茫，每天喝茶解悶。</p>
+                <p>我的首席門生大弟子Luna，是一位來自臺灣的吳姓女子，她需要我撰寫一篇關於符的歷史背景，以便宣傳這份符的文化，最近喝了好多茶，靈感突發，便寫下了這些文字，或許有緣的朋友能從中領悟到，改運離不開立志，而立志的第一個捷徑，便是多喝水啦，哈哈。</p>
+                <p>好了，不再閒扯，回歸正題。</p>
+                <p>我和余師太在上次會面時分享了一段特別的經歷，我將這道符不僅遍贈結緣中國各地，還遠送至美國、韓國、奧克蘭、新加坡、馬來西亞、泰國、迪拜、英國、德國、法國、柬埔寨等多個國家和地區。</p>
+                <p>只見老人默默無言，悄然拭淚，她輕聲訴說，自己曾懷揣一個夢想就是幫助更多的人們，傳遞美好的祝願，給予更多人祝福，然而，她感嘆自己力量微薄，難以實現，她已走過八十餘載歲月，卻連雲南省的邊界都未曾踏出。</p>
+                <p>聽著余師太的述說，我心中湧起無盡的感慨，她的一生，雖囿於一方狹小天地，卻始終心繫天下，這份慈悲與宏願，令人深深動容。</p>
+                <p>如今，我帶著她的殷切期望，將這道符送往世界各地，也算是為她圓了那個未竟之夢。</p>
+                <p>她依舊默默拭淚，我深知那是欣慰的淚水，是對夢想成真的感動，我輕輕拍了拍她的肩膀，告訴她，她的善念已跨越千山萬水，抵達了世界的各個角落，無數人因這道符而感受到溫暖與力量。</p>
+            </div>
+        </article>
+
+        <!-- Section 7 -->
+        <article id="section-7" class="mb-20 fade-in">
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <h2 class="text-2xl font-serif font-bold text-ink relative z-10">飛虎隊、先輩庇護與五雷符的祝福</h2>
+            </div>
+            
+            <div class="prose prose-lg text-ink/90 leading-loose font-sans">
+                <p>今天寫下這份「歷史由來」是想告訴世界各位朋友，尤其是來自全球「飛虎隊」後裔們，當你們拿到這道符時，你們恭請的這道符，它承載著你的念，這份念裡所有的美好祈願，不僅有神力也有來自你們的先輩的庇護，他們像風與你相擁，也化進符中與你再次見面，這道符，是跨越時空的紐帶，連接著過去與現在，也連結著你們與先輩。</p>
+                <p>它帶著歷史的厚重，也蘊含著未來的希望，當你們手持這道符，彷彿能感受到先輩們英勇無畏的氣息，他們雖已遠去，但精神永存，正以另一種方式守護著你們。</p>
+                <p>這份守護，是愛的延續，正如我補足精力寫下這份文字喝茶用的那隻杯子，上面刻寫著「巳巳如意，生生不息」也是力量的傳遞，願它能帶給你們勇氣與智慧，伴你們走過人生的每一個階段。</p>
+                <p>在符文化大宗及其禁忌與使用說明的另一篇文中，大家便能理解我為何僅專注於製作這一道「五雷符」，它蘊含著最核心的念力凝聚力，如同入諱的終極原理。</p>
+                <p>我未曾料想，這道符竟讓我在各位的家鄉當地聲名鵲起，或許這正是「飛虎隊」之寓意——飛者騰於天，虎者震於地，天地間自有其獨特的記憶，正是先輩們的庇佑與助力，才促成我與你們的相遇與結緣，終至這場美好的邂逅。</p>
+                <p>再次深深感恩當年為我的家鄉和祖國付出犧牲與巨大貢獻的飛虎隊先輩們，感恩你們那清澈如水的愛，只為中國。</p>
+                <p>如今，作為這片故土的後裔，還有我的首席得意門生Luna大弟子，將攜帶著這份信念，走向世界的每一個角落。</p>
+                <p>家鄉如今風貌如畫，熱忱歡迎各位同胞及飛虎隊後裔蒞臨。</p>
+                <p>這裡的山水依舊秀麗，每一寸土地都飽含著深厚的情誼與動人故事，無論你是追尋歷史的印記，還是體驗現代的蓬勃生機，我與家鄉都將用最溫暖的懷抱迎接每一位遠道而來的朋友，讓我們在這片熱土上，共同譜寫更多關於愛與傳承的華美篇章。</p>
+                
+                <div class="mt-16 text-center">
+                    <p class="font-serif text-xl font-bold text-ink mb-4">再次願世界安寧和平<br>我與眾人的祖國皆繁榮昌盛</p>
+                    <div class="mt-8 inline-block">
+                       <div class="w-8 h-8 border border-cinnabar rotate-45 flex items-center justify-center mx-auto">
+                           <div class="w-4 h-4 bg-cinnabar/80"></div>
+                       </div>
+                    </div>
+               </div>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-ink text-paper py-12 px-6">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <h3 class="font-serif text-xl mb-2 tracking-widest">異人研究院xLuna寵物溝通師</h3>
+                <p class="text-stone text-xs font-sans opacity-60">Inheritance of Oriental Mysticism</p>
+            </div>
+            <div class="text-stone text-xs font-sans tracking-wide opacity-50">
+                &copy; 2025 金瀾言卿. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Register GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Menu Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const menuItems = document.querySelectorAll('.menu-item');
+        let isMenuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            
+            if (isMenuOpen) {
+                // Open Menu
+                gsap.to(menuOverlay, { x: '0%', duration: 0.8, ease: 'power3.inOut' });
+                // Animate Burger to X (Simplified)
+                menuBtn.children[0].classList.add('rotate-45', 'translate-y-1.5');
+                menuBtn.children[1].classList.add('-rotate-45', '-translate-y-1.5');
+                // Stagger Items
+                gsap.fromTo(menuItems, 
+                    { y: 50, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.5, stagger: 0.05, delay: 0.3 }
+                );
+            } else {
+                // Close Menu
+                gsap.to(menuOverlay, { x: '100%', duration: 0.8, ease: 'power3.inOut' });
+                menuBtn.children[0].classList.remove('rotate-45', 'translate-y-1.5');
+                menuBtn.children[1].classList.remove('-rotate-45', '-translate-y-1.5');
+            }
+        });
+
+        // Menu Navigation Logic
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const targetId = item.getAttribute('data-target');
+                const targetSection = document.querySelector(targetId);
+                
+                // Close menu first
+                isMenuOpen = false;
+                gsap.to(menuOverlay, { x: '100%', duration: 0.8, ease: 'power3.inOut' });
+                menuBtn.children[0].classList.remove('rotate-45', 'translate-y-1.5');
+                menuBtn.children[1].classList.remove('-rotate-45', '-translate-y-1.5');
+                
+                // Scroll to section
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 120,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Progress Bar Logic
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Content Fade In Animation
+        const fadeElements = document.querySelectorAll('.fade-in');
+        fadeElements.forEach(el => {
+            gsap.fromTo(el, 
+                { y: 30, opacity: 0 },
+                {
+                    y: 0, 
+                    opacity: 1, 
+                    duration: 1, 
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 90%', // Trigger earlier for mobile
+                    }
+                }
+            );
+        });
+    </script>
+</body>
+</html>
